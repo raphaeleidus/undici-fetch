@@ -20,9 +20,10 @@ function printResults (results, n) {
 
 if (isMainThread) {
   const server = createServer((req, res) => {
-    setTimeout(() => {
-      res.end('payload')
-    }, 1)
+    process.nextTick(() => {
+      res.write('payload')
+      res.end()
+    })
   })
 
   server.listen(0, () => {
